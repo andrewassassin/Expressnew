@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include head %>
+</head>
+<body>
+    <% include navbar %>
+    <header id="editHeader" class="jumbotron header">
+        <div class="container">
+            <h1>Modified item</h1>
+        </div>
+    </header>
+    <section class="py-3">
+        <form id="editProductForm" class="container">
+            <div class="form-group">
+                <label for="productName">商品名稱</label>
+                <input value="<%= product.name %>" type="text" id="productName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">商品價格</label>
+                <input  value="<%= product.price %>" type="number" id="productPrice" class="form-control" min="1" max="20000" required>
+            </div>
+            <div class="form-group">
+                <label for="productImage">商品圖片</label>
+                <input  value="<%= product.image %>" type="text" id="productImage" class="form-control"
+                     required>
+            </div>
+            <div class="form-group">
+                <label for="productCategory">商品分類</label>
+               <% const optionList = ["食品","生活用品","文具","清潔用品","其他"]%>
+                <select id="productCategory" class="form-control">
+                   <% optionList.forEach(opt => { %>
+                    <% if (product.category == opt) { %>
+                        <option value="<%= opt %>" selected>
+                            <%= opt %>
+                        </option>
+                    <% } else {%>
+                        <option value="<%= opt %>">
+                            <%= opt %>
+                        </option>
+                        <% } %>
+                   <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 新增商品</button>
+            </div>
+        </form>
+    </section>
+    <% include scripts %> 
+    <script>
+        const pid = "<%=product.id%>"
+        $("#editProductForm").submit(function(e){
+            e.preventDefault();
+            const product = {
+                name: $("#productName").val(),
+                price:$("#productPrice").val(),
+                image:$("#productImage").val(),
+                category:$("#productCategory").val(),
+                createdAt: new Date().getTime()
+            }
+            axios.put(`/api/product/edit/${pid}`,product)
+            .then(res =>{
+                console.log(res);
+                // window.location ="/"
+            })
+            .catch(err =>{
+                console.log(err);
+            })
+        })
+
+
+    </script>
+   
+
+</body>
+</html>
