@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db');
+const loginchecker = require('../middleware/login-checker')
+
+loginchecker(router)
 
 
 /* GET home page. */

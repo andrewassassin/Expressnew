@@ -6,19 +6,26 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav ml-auto">     
+        <ul class="navbar-nav ml-auto">   
+            <% if(!auth.isLogin) { %>  
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" href="#signUpModal">註冊</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" href="#loginModal">登入</a>
             </li>    
+            <% } %>
+            <% if(auth.user) { %> 
             <li class="nav-item">
                 <a id="logoutBtn" class="nav-link">登出</a>
-            </li>        
+            </li>  
             <li class="nav-item">
-                <a href="produc/create" class="nav-link">建立產品</a>
+                <a class="nav-link"><%= auth.user.email %></a>
+            </li>      
+            <li class="nav-item">
+                <a href="/produc/create" class="nav-link">建立產品</a>
             </li>
+            <% } %>
         </ul>
     </div>
 </nav>
