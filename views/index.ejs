@@ -27,12 +27,13 @@
           </h4>
           <p class="card-text"> $ <%= product.price %> NTD</p>
          
-        
+          <% if(auth.isAdmin) { %> 
               <a href="/produc/edit/<%= product.id %>" class="btn btn-warning">編輯</a>
      
       
           <button class="delete-btn btn btn-danger" data-id="<%=product.id%>" type="button" class="btn btn-danger"><i class="fas fa-trash"></i>
             刪除商品</button>
+            <% } %>
         </div>
       </div>
     </div>

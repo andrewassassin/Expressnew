@@ -22,6 +22,8 @@
             <li class="nav-item">
                 <a class="nav-link"><%= auth.user.email %></a>
             </li>      
+            <% } %>
+            <% if(auth.isAdmin) { %> 
             <li class="nav-item">
                 <a href="/produc/create" class="nav-link">建立產品</a>
             </li>

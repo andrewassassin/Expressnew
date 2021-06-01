@@ -1,8 +1,9 @@
 const express = require('express');
-
 const router = express.Router();
 const db = require('../db');
+const adminGuard = require('../middleware/admin-guard');
 
+adminGuard(router);
 
 //建立產品路由
 router.get('/create',function(req,res,next){

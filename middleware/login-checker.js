@@ -1,4 +1,5 @@
 const admin = require('../firebase')
+const db= require('../db')
 
 
 function loginChecker(router){
@@ -15,11 +16,17 @@ function loginChecker(router){
         admin
         .auth()
         .verifySessionCookie(sessionCookie, true )
-        .then(user => {
-         console.log("驗證成功",auth)
+        .then(async user => {
+         console.log("驗證成功",user)
+         const email = user.email;
          auth.isLogin = true;
          auth.user = user;
-
+         const adminDoc = await db.doc(`adminList/${email}`).get()
+            // 如果文件存在
+        if(adminDoc.exists){
+            // 此人為管理者
+            auth.isAdmin = true;
+        }
          res.locals.auth = auth;
          next();
       
