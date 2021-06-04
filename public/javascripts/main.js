@@ -107,13 +107,13 @@ var oDiv = document.getElementById("intension");
 var nodes = oDiv.getElementsByTagName("div");
 
 oPassword.onkeyup = function() {
-    var oValue = oPassword.value;
+    var xValue = oPassword.value;
         for(var i = 0; i < nodes.length; i++){
             nodes[i].className = '';
             }
-            if(/\d/.test(oValue) && /[a-z]/.test(oValue) && /[A-Z]/.test(oValue)){ 
+            if(/\d/.test(xValue) && /[a-z]/.test(xValue) && /[A-Z]/.test(xValue)){ 
             nodes[2].className = "active";   
-            } else if(/^\d+$/.test(oValue) || /^[A-Z]+$/.test(oValue) || /^[a-z]+$/.test(oValue)){   
+            } else if(/^\d+$/.test(xValue) || /^[A-Z]+$/.test(xValue) || /^[a-z]+$/.test(xValue)){   
             nodes[0].className = "active";  
             } else{   
             nodes[1].className = "active";  
