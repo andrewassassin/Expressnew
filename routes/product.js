@@ -13,9 +13,9 @@ router.get('/create',function(req,res,next){
 //編輯產品路由
 router.get('/edit/:pid', async function(req,res,next){
     const pid = req.params.pid;
-    console.log("pid",pid)
+    // console.log("pid",pid)
     const doc =  await db.doc(`productList/${pid}`).get()
-    console.log("doc",doc)
+    // console.log("doc",doc)
     const product = doc.data();
     product.id = doc.id;
     res.locals.product = product;

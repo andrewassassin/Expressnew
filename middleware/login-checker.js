@@ -4,8 +4,10 @@ const db= require('../db')
 
 function loginChecker(router){
     router.use(function(req,res,next){
+        console.log("終端機訊息",req.method, req.url);
         console.log("進入檢查站")
         const cookieName = 'ession';
+        console.log("req.cookies%%%%%%",req.cookies)
         const sessionCookie = req.cookies[cookieName] || '';
         console.log("驗證sessionCookie",sessionCookie)
         const auth ={
@@ -28,12 +30,14 @@ function loginChecker(router){
             auth.isAdmin = true;
         }
          res.locals.auth = auth;
+         console.log("驗證成功要call next")
          next();
       
         })
         .catch(err => {
          console.log(err)
          res.locals.auth = auth;
+         console.log("驗證失敗要call next")
          next();
          })
         } )
