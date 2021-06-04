@@ -8,6 +8,7 @@ loginchecker(router)
 
 /* GET home page. */
 router.get('/',async function(req, res, next) {
+  console.log("這裡是router get/")
   const productList= [];
   const collection = await db 
   .collection("productList")
@@ -15,7 +16,7 @@ router.get('/',async function(req, res, next) {
   .get()
 
 
-  console.log("collection",collection)
+  // console.log("collection",collection)
   
   collection.forEach(doc=> {
     const product = doc.data();

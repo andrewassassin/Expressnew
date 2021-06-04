@@ -100,3 +100,23 @@ $('#logoutBtn').click(function () {
           window.location = '/'
       });
 });
+
+// 密碼強度驗證
+var oPassword = document.getElementById("loginPassword");
+var oDiv = document.getElementById("intension");
+var nodes = oDiv.getElementsByTagName("div");
+
+oPassword.onkeyup = function() {
+    var oValue = oPassword.value;
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].className = '';
+            }
+            if(/\d/.test(oValue) && /[a-z]/.test(oValue) && /[A-Z]/.test(oValue)){ 
+            nodes[2].className = "active";   
+            } else if(/^\d+$/.test(oValue) || /^[A-Z]+$/.test(oValue) || /^[a-z]+$/.test(oValue)){   
+            nodes[0].className = "active";  
+            } else{   
+            nodes[1].className = "active";  
+        }
+}
+    

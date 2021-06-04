@@ -57,9 +57,9 @@ router.post('/logout', function (req, res, next) {
 
 // 新增商品
 router.post('/create',  function(req,res,next){
-    console.log('[準備新增商品]');
+    // console.log('[準備新增商品]');
     const product = req.body;
-    console.log("前端送來的資料", product)
+    // console.log("前端送來的資料", product)
      db.collection("productList").add(product)
     res.status(200).json({
         msg:"ok",
@@ -71,9 +71,8 @@ router.post('/create',  function(req,res,next){
 router.put('/product/edit/:pid',async function(req,res,next){
     const product = req.body;
     const pid =req.params.pid;
-    console.log("前端送來的資料", product)
+    // console.log("前端送來的資料", product)
     const doc = await db.doc(`productList/${pid}`).update(product)
-    console.log("doc%%%%%%%%%%",doc)
     res.status(200).json({
         msg:"Updated",
     })

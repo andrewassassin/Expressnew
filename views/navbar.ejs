@@ -15,7 +15,7 @@
                 <a class="nav-link" data-toggle="modal" href="#loginModal">登入</a>
             </li>    
             <% } %>
-            <% if(auth.user) { %> 
+            <% if(auth.isLogin) { %> 
             <li class="nav-item">
                 <a id="logoutBtn" class="nav-link">登出</a>
             </li>  
@@ -66,7 +66,7 @@
 <!-- loginModal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form id="loginForm" class="modal-content">
+        <form id="loginForm" class="modal-content">  
             <div class="modal-header">
                 <h5 class="modal-title">Login</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,17 +77,23 @@
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" class="form-control" placeholder="請輸入您的Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">密碼</label>
-                    <input type="password" id="loginPassword" class="form-control" placeholder="請輸入您的密碼" minlength="6"
-                        required>
-                </div>
-            </div>
+                </div>         
+                <div  class="form-group"> 
+                    <label for="loginPassword">密碼</label>        
+                    <input type="password" id = 'loginPassword' class="form-control" placeholder="密碼" required>        
+                    <div id = 'intension'>   
+                        <p class="textarea">密碼強度</p>         
+                        <div>弱</div>            
+                        <div>中</div>            
+                        <div>強</div>                            
+                    </div>
+                </div>    
+                            
+            </div>   
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 <button type="submit" class="btn btn-primary">登入</button>
-            </div>
+            </div>                  
         </form>
     </div>
 </div>
