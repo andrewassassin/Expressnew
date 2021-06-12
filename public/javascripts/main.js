@@ -102,21 +102,25 @@ $('#logoutBtn').click(function () {
 });
 
 // 密碼強度驗證
-var oPassword = document.getElementById("loginPassword");
-var oDiv = document.getElementById("intension");
-var nodes = oDiv.getElementsByTagName("div");
+let oPassword = document.getElementById("loginPassword");
+let oDiv = document.getElementById("intension");
+let nodes = oDiv.getElementsByTagName("div");
+
+function addClass(t){
+  for(var i = 0; i < nodes.length; i++){
+      nodes[i].className = '';
+    }
+    nodes[t].className="active";
+}
+
 
 oPassword.onkeyup = function() {
     var oValue = oPassword.value;
-        for(var i = 0; i < nodes.length; i++){
-            nodes[i].className = '';
-            }
             if(/\d/.test(oValue) && /[a-z]/.test(oValue) && /[A-Z]/.test(oValue)){ 
-            nodes[2].className = "active";   
+              addClass(2);
             } else if(/^\d+$/.test(oValue) || /^[A-Z]+$/.test(oValue) || /^[a-z]+$/.test(oValue)){   
-            nodes[0].className = "active";  
+              addClass(0);
             } else{   
-            nodes[1].className = "active";  
-        }
-}
-    
+              addClass(1);
+            }
+  }
