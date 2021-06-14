@@ -109,8 +109,8 @@ let nodes = oDiv.getElementsByTagName("div");
 function addClass(t){
   for(var i = 0; i < nodes.length; i++){
       nodes[i].className = '';
+      nodes[t].className="active";
     }
-    nodes[t].className="active";
 }
 
 

@@ -66,7 +66,7 @@
 <!-- loginModal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form id="loginForm" class="modal-content">  
+        <form id="loginForm" class="modal-content ">  
             <div class="modal-header">
                 <h5 class="modal-title">Login</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -78,11 +78,11 @@
                     <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" class="form-control" placeholder="請輸入您的Email" required>
                 </div>         
-                <div  class="form-group pinput"> 
+                <div class="form-group pinput password-container"> 
                     <label for="loginPassword">密碼</label>   
                     <input type="password" id = 'loginPassword' class="form-control" placeholder="密碼" required>                     
                     <br>
-                    <div class="pincode container">  
+                    <div class="password-hint container">  
                         <div id = 'intension'>   
                             <p class="textarea">密碼建議包含英文+數字</p>  
                             <br>       
@@ -91,6 +91,7 @@
                             <div>強</div>                            
                         </div> 
                     </div>
+                </input>
                 </div>    
                             
             </div>   
