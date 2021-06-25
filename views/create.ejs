@@ -5,63 +5,127 @@
 </head>
 <body>
     <% include navbar %>
-    <header id="createHeader" class="jumbotron header">
-        <div class="container">
-            <h1>New item established</h1>
-        </div>
+    <header class="mb-4 header">
+      
+        <img src="../public/images/carousel-1.jpg" alt="" class="w-100">
+           
     </header>
     <section class="py-3">
-        <form id="createProductForm" class="container">
-            <div class="form-group">
-                <label for="productName">商品名稱</label>
-                <input type="text" id="productName" class="form-control" required>
+        <div class="container">
+            <div class="row">
+                <form id="createProductForm" class="container col-md-6 py-3">
+                    <div class="form-group">
+                        <label for="productName">商品名稱</label>
+                        <input type="text" id="productName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">商品價格</label>
+                        <input type="number" id="productPrice" class="form-control" min="1" max="90000" required>
+                    </div>
+                    <div class="form-group">
+                        <input type='file' id='productImage' accept="image/*">
+                        <input type='button' id='btnLoad' value='檢查圖片大小' >
+                    </div> 
+                    <div class="form-group">
+                        <label for="productCategory">商品分類</label>
+                        <select id="productCategory" class="form-control">
+                            <option value="書架喇叭">書架喇叭</option>
+                            <option value="腳架" selected>腳架</option>
+                            <option value="墊材">墊材</option>
+                            <option value="藍芽喇叭">藍芽喇叭</option>
+                            <option value="落地喇叭">落地喇叭</option>
+                        </select>
+                    </div>
+                    <div class="form-group my-4">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 新增商品</button>
+                    </div>
+                </form>
+                <!-- 商品圖片預覽區塊 -->
+                <img class="col-md-4" id="blah" src="#" alt="商品圖片預覽" width="200"/>
             </div>
-            <div class="form-group">
-                <label for="productPrice">商品價格</label>
-                <input type="number" id="productPrice" class="form-control" min="1" max="20000" required>
-            </div>
-            <div class="form-group">
-                <label for="productImage">商品圖片</label>
-                <input type="text" id="productImage" class="form-control"
-                    value="https://picsum.photos/id/1070/1200/600" required>
-            </div>
-            <div class="form-group">
-                <label for="productCategory">商品分類</label>
-                <select id="productCategory" class="form-control">
-                    <option value="食品">食品</option>
-                    <option value="生活用品" selected>生活用品</option>
-                    <option value="文具">文具</option>
-                    <option value="清潔用品">清潔用品</option>
-                    <option value="其他">其他</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 新增商品</button>
-            </div>
-        </form>
+        </div>
     </section>
+ 
     <% include scripts %> 
     <script>
-        $("#createProductForm").submit(function(e){
-            e.preventDefault();
-            const product = {
-            name: $("#productName").val(),
-            price:$("#productPrice").val(),
-            image:$("#productImage").val(),
-            category:$("#productCategory").val(),
-            createdAt: new Date().getTime()
-            }
-            console.log("新增產品",product)
-            axios.post('/api/create', product)
-                .then( res =>{
-                    console.log("後端送來的資料",res.data)
-                    // window.location="/";
-                })
-                .catch( err =>{
-                    console.log(err)
-                })
+    
+    $('#productImage').change( function() {
+            var value = document.getElementById("productImage").files[0].name;
+            console.log("圖片路徑",value)
+            $("#createProductForm").submit(function(e){
+                e.preventDefault();
+                const product = {
+                name: $("#productName").val(),
+                price:$("#productPrice").val(),
+                image: `../public/images/${value}` ,
+                category:$("#productCategory").val(),
+                createdAt: new Date().getTime()
+                }
+                console.log("新增產品",product)
+                console.log("新增產品",value)
+                axios.post('/api/create', product)
+                    .then( res =>{
+                        console.log("後端送來的資料",res.data)
+                        // window.location="/";
+                    })
+                    .catch( err =>{
+                        console.log(err)
+                    })
+                console.log("圖片值",value)
+            })
            
-        })
+        });
+     
+  
+       
+        // &&&   圖片大小提示   &&&&   //
+        document.getElementById("btnLoad").addEventListener("click", function showFileSize() {
+        // (Can't use `typeof FileReader === "function"` because apparently it
+        // comes back as "object" on some browsers. So just see if it's there
+        // at all.)
+        if (!window.FileReader) { // This is VERY unlikely, browser support is near-universal
+            console.log("The file API isn't supported on this browser yet.");
+            return;
+        }
+
+        var input = document.getElementById('productImage');
+        if (!input.files) { // This is VERY unlikely, browser support is near-universal
+            console.error("This browser doesn't seem to support the `files` property of file inputs.");
+        } else if (!input.files[0]) {
+            addPara("Please select a file before clicking 'Load'");
+        } else {
+            var file = input.files[0];
+            addPara("File " + file.name + " is " + file.size + " bytes in size");
+        }
+    });
+
+    function addPara(text) {
+        var p = document.createElement("p");
+        p.textContent = text;
+        document.body.appendChild(p);
+    }
+
+        // $("#createProductForm").submit(function(e){
+        //     e.preventDefault();
+        //     const product = {
+        //     name: $("#productName").val(),
+        //     price:$("#productPrice").val(),
+        //     image: imageVal ,
+        //     category:$("#productCategory").val(),
+        //     createdAt: new Date().getTime()
+        //     }
+        //     console.log("新增產品",product)
+        //     console.log("新增產品",value)
+        //     axios.post('/api/create', product)
+        //         .then( res =>{
+        //             console.log("後端送來的資料",res.data)
+        //             // window.location="/";
+        //         })
+        //         .catch( err =>{
+        //             console.log(err)
+        //         })
+           
+        // })
         
     </script>
 
