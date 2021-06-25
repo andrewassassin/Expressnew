@@ -21,11 +21,10 @@ app.use(express.json());
 app.use(cookieParser());
 // 設定前端資源路由 /assets/ => 可指向assets資料夾內的資源
 app.use('/public', express.static(path.join(__dirname, '/public')));
-// app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 
 app.use('/', indexRouter);
-
 app.use('/produc', productRouter)
 app.use('/api', apiRouter);
 // 設定Cookie名稱

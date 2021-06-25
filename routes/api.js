@@ -63,7 +63,8 @@ router.post('/create',  function(req,res,next){
      db.collection("productList").add(product)
     res.status(200).json({
         msg:"ok",
-        productName: product.name
+        productName: product.name,
+        productimage: product.image
     })
 })
 

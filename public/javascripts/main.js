@@ -124,3 +124,13 @@ oPassword.onkeyup = function() {
               addClass(1);
             }
   }
+
+  // 綁定圖片預覽
+  const imgInp = document.getElementById("productImage")
+  imgInp.onchange = event => {
+      const [file] = imgInp.files
+      console.log(["file"],file)
+      if (file) {
+        blah.src = URL.createObjectURL(file)
+      }
+    }

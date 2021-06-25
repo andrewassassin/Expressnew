@@ -5,10 +5,8 @@
 </head>
 <body>
     <% include navbar %>
-    <header id="editHeader" class="jumbotron header">
-        <div class="container">
-            <h1>Modified item</h1>
-        </div>
+    <header class="mb-4 header">     
+        <img src="/public/images/carousel-1.jpg" alt="" class="w-100">         
     </header>
     <section class="py-3">
         <form id="editProductForm" class="container">
@@ -18,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="productPrice">商品價格</label>
-                <input  value="<%= product.price %>" type="number" id="productPrice" class="form-control" min="1" max="20000" required>
+                <input  value="<%= product.price %>" type="number" id="productPrice" class="form-control" min="1" max="90000" required>
             </div>
             <div class="form-group">
                 <label for="productImage">商品圖片</label>
@@ -27,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="productCategory">商品分類</label>
-               <% const optionList = ["食品","生活用品","文具","清潔用品","其他"]%>
+               <% const optionList = ["書架喇叭","腳架","墊材","藍芽喇叭","落地喇叭"]%>
                 <select id="productCategory" class="form-control">
                    <% optionList.forEach(opt => { %>
                     <% if (product.category == opt) { %>
@@ -43,7 +41,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 新增商品</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 更新商品</button>
             </div>
         </form>
     </section>
